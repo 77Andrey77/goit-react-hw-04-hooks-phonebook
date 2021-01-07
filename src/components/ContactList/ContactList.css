@@ -1,0 +1,19 @@
+.contactItem {
+    display: flex;
+    width: 350px;
+    background-color: rgb(240, 178, 104);
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.item {
+    color: rgb(10, 9, 9);
+    padding-left: 10px;
+}
+.button {
+    padding: 5px;
+    margin: 10px;
+    color: rgb(248, 245, 246);
+    background-color: rgb(112, 43, 192);
+}
