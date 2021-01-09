@@ -1,73 +1,84 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import '../Form/Form.css';
-import shortid from 'shortid';
+// import shortid from 'shortid';
 
-class Form extends Component {
-  state = {
-    name: '',
-    number: '',
-  };
+export default function Form({ onSubmit }) {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
 
-  nameInputId = shortid.generate();
-  numberInputId = shortid.generate();
+  // state = {
+  //   name: '',
+  //   number: '',
+  // };
 
-  handleChange = event => {
+  // const nameInputId = shortid.generate();
+  // const numberInputId = shortid.generate();
+
+  const handleChange = event => {
     // console.log(event.currentTarget.value);
-    const { name, value } = event.currentTarget;
+    const { name, value } = event.target;
 
-    this.setState({
-      [name]: value,
-    });
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+
+      case 'number':
+        setNumber(value);
+        break;
+
+      default:
+        return;
+    }
   };
 
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
     // console.log(this.state);
-    this.props.onSubmit(this.state); // отправляем значения сабмита в пропс
-    this.setState({ name: '', number: '' }); //обнуляем форму
+    onSubmit(name, number); // отправляем значения сабмита в пропс
+    setName(''); //обнуляем форму
+    setNumber('');
   };
 
-  render() {
-    const { name, number } = this.state;
-    return (
-      <div>
-        <form className="form" id="contact" onSubmit={this.handleSubmit}>
-          <label className="label" htmlFor={this.nameInputId}>
-            Name
-            <input
-              className="input-field"
-              type="text"
-              name="name"
-              value={name}
-              onChange={this.handleChange}
-              id={this.nameInputId}
-              placeholder="John Dows"
-            />
-          </label>
-          <br />
-          <label htmlFor={this.numberInputId}>
-            Phone number
-            <input
-              className="input-field"
-              type="text"
-              name="number"
-              value={number}
-              onChange={this.handleChange}
-              id={this.numberInputId}
-              placeholder="459-12-56"
-            />
-          </label>
+  // const { name, number } = this.state;
+  return (
+    <div>
+      <form className="form" id="contact" onSubmit={handleSubmit}>
+        <label className="label">
+          Name
+          <input
+            className="input-field"
+            type="text"
+            name="name"
+            value={name}
+            onChange={handleChange}
+            // id={nameInputId}
+            placeholder="John Dows"
+          />
+        </label>
+        <br />
+        <label>
+          Phone number
+          <input
+            className="input-field"
+            type="text"
+            name="number"
+            value={number}
+            onChange={handleChange}
+            // id={numberInputId}
+            placeholder="459-12-56"
+          />
+        </label>
 
-          <button type="submit" className="submit-button">
-            Add contact
-          </button>
-        </form>
-      </div>
-    );
-  }
+        <button type="submit" className="submit-button">
+          Add contact
+        </button>
+      </form>
+    </div>
+  );
 }
+
 Form.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
-export default Form;
