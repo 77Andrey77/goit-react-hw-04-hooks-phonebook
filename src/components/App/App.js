@@ -25,33 +25,27 @@ export default function App() {
       number,
     };
 
-    const isNameContacts = contacts.find(
+    const isNameContacts = contacts.some(
       contact => contact.name.toLowerCase() === name.toLowerCase(),
     );
 
-    const isNumberContacts = contacts.find(
+    const isNumberContacts = contacts.some(
       contact => contact.number === number,
     );
 
-    isNameContacts || isNumberContacts
-      ? alert(`${name}or ${number} is already in contacts`)
-      : setContacts(prevContacts => [contact, ...prevContacts]);
+    // isNameContacts || isNumberContacts
+    //   ? alert(`${name}or ${number} is already in contacts`)
+    //   : setContacts(prevContacts => [contact, ...prevContacts]);
 
-    // if (isNameContacts) {
-    //   alert(`${name} is already in contacts`);
-    // } else if (name.trim() === '' || number.trim() === '') {
-    //   alert('You cannot add such a name and number');
-    // } else if (isNumberContacts) {
-    //   alert(`${number} is alread in contacts`);
-    // } else {
-    //   const contact = {
-    //     id: shortid.generate(),
-    //     name,
-    //     number,
-    //   };
-    //   //распыляет в массив
-    //   setContacts([contact, ...contacts]);
-    // }
+    if (isNameContacts) {
+      alert(`${name} is already in contacts`);
+    } else if (name.trim() === '' || number.trim() === '') {
+      alert('You cannot add such a name and number');
+    } else if (isNumberContacts) {
+      alert(`${number} is alread in contacts`);
+    } else {
+      setContacts(prevContacts => [contact, ...prevContacts]);
+    }
   };
 
   /////////////////////////////
