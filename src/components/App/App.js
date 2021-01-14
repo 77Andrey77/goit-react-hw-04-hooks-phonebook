@@ -19,12 +19,6 @@ export default function App() {
 
   //////////////////////////////////////////
   const addContact = (name, number) => {
-    const contact = {
-      id: shortid.generate(),
-      name,
-      number,
-    };
-
     const isNameContacts = contacts.some(
       contact => contact.name.toLowerCase() === name.toLowerCase(),
     );
@@ -44,6 +38,12 @@ export default function App() {
     } else if (isNumberContacts) {
       alert(`${number} is alread in contacts`);
     } else {
+      const contact = {
+        id: shortid.generate(),
+        name,
+        number,
+      };
+
       setContacts(prevContacts => [contact, ...prevContacts]);
     }
   };
